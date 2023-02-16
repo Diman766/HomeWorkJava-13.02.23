@@ -1,6 +1,6 @@
 package BaseHero;
 
-public abstract class BaseHero {
+public abstract class BaseHero implements Interface{
     protected String heroID;
     protected int number;
     protected int hp;
@@ -29,6 +29,14 @@ public abstract class BaseHero {
 
     public void healing() {
     
+    }
+    public String GetInfo() {
+        return String.format("Name: %s  Hp: %d  Role: %s",
+        this.heroID, this.hp, this.getClass().getSimpleName());
+    }
+    
+    public void Step() {
+
     }
 
 }
