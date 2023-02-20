@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Random;
 
@@ -9,56 +10,67 @@ public class Main {
 
    public static void main(String[] args) {
 
-      List<BaseHero> red = redTeam(10);
-      teamInfo(red);
-
-      List<BaseHero> blue = blueTeam(10);
-      teamInfo(blue);
-      
-   }
-
-   public static List<BaseHero> blueTeam(int quantity) {
-      List<BaseHero> blue = new ArrayList<>();
-
-      for (int index = 0; index < quantity; index++) {
-         switch (new Random().nextInt(0, 3)) {
-            case 0:
-               blue.add(new Peasant(heroName()));
-               break;
-            case 1:
-               blue.add(new Magician(heroName()));
-               break;
-            case 2:
-               blue.add(new Crossbowman(heroName()));
-               break;
-            case 3:
-               blue.add(new Raider(heroName()));
-               break;
-         }
-      }
-      return blue;
-   }
-
-   public static List<BaseHero> redTeam(int quantity) {
       List<BaseHero> red = new ArrayList<>();
+      getTeam(10,red,2);
+      // teamInfo(red);
 
-      for (int index = 0; index < quantity; index++) {
-         switch (new Random().nextInt(0, 3)) {
-            case 0:
-               red.add(new Farmer(heroName()));
-               break;
-            case 1:
-               red.add(new Monk(heroName()));
-               break;
-            case 2:
-               red.add(new Sniper(heroName()));
-               break;
-            case 3:
-               red.add(new Spearman(heroName()));
-               break;
+      List<BaseHero> blue = new ArrayList<>();
+      getTeam(10,blue,1);
+      // teamInfo(blue);
+
+      List<BaseHero> twoTeam = new ArrayList<>();
+      twoTeam.addAll(red);
+      twoTeam.addAll(blue);
+
+      twoTeam.sort(new Comparator<BaseHero>() {
+         @Override
+         public int compare(BaseHero o1,BaseHero o2){
+            if (o2.getSpeed() == o1.getSpeed()) return o2.getHp() - o1.getHp();
+            return o2.getSpeed() - o1.getSpeed();
          }
+      });
+
+      teamInfo(twoTeam);
+
+   }
+
+   public static void getTeam(int quantity,List<BaseHero> team,int whichTeam){
+      if (whichTeam == 1){
+         for (int index = 0; index < quantity; index++) {
+            switch (new Random().nextInt(0, 4)) {
+               case 0:
+                  team.add(new Peasant(heroName()));
+                  break;
+               case 1:
+                  team.add(new Magician(heroName()));
+                  break;
+               case 2:
+                  team.add(new Crossbowman(heroName()));
+                  break;
+               case 3:
+                  team.add(new Raider(heroName()));
+                  break;
+            }
+         }
+      }else{
+         for (int index = 0; index < quantity; index++) {
+            switch (new Random().nextInt(0, 4)) {
+               case 0:
+                  team.add(new Farmer(heroName()));
+                  break;
+               case 1:
+                  team.add(new Monk(heroName()));
+                  break;
+               case 2:
+                  team.add(new Sniper(heroName()));
+                  break;
+               case 3:
+                  team.add(new Spearman(heroName()));
+                  break;
+            }
+         }
+
       }
-      return red;
    }
 
    public static void teamInfo(List<BaseHero> team) {

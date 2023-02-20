@@ -3,8 +3,10 @@
 import BaseHero.BaseHero;
 
 public abstract class MagicianUnit extends BaseHero{
-    public MagicianUnit(String heroID) {
-        super(heroID, 120, 50, 50);
+    protected int magic;
+    public MagicianUnit(String heroID, int attack,int protection,int[] damage,int speed) {
+        super( heroID,  30, attack, protection, damage, speed);
+        this.magic = 1;
     }
 
     public void healing() {

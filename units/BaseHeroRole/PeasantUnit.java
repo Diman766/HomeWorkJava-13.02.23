@@ -5,12 +5,12 @@ import BaseHero.BaseHero;
 
 public abstract class PeasantUnit extends BaseHero {
 
-    protected int food;
+    protected int delivery;
 
     public PeasantUnit(String heroID) {
-        super( heroID,  100, 10, 10);
+        super( heroID,  1, 1, 1,new int[]{1, 1},3);
         
-        this.food = 5;
+        this.delivery = 1;
     }
    
 }
