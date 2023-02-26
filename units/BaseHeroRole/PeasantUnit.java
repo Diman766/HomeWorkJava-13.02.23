@@ -14,7 +14,7 @@ public abstract class PeasantUnit extends BaseHero {
     }
 
     @Override
-    protected void Step(List<BaseHero> twoTeam) {
+    public void Step(List<BaseHero> twoTeam) {
         if (state != "Die") state = "Stand";
         
     }

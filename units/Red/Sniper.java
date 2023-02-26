@@ -5,7 +5,7 @@ public class Sniper extends ShooterUnit {
                 32, 1, x, y);
     }
 
-    @Override
+    // @Override
     public void Step() {
        
     }
