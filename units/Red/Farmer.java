@@ -1,10 +1,13 @@
 
 public class Farmer extends PeasantUnit {
-    public Farmer(String heroID) {
-        super(heroID);
+    public Farmer(String heroID, int x, int y) {
+        super(heroID,1, x, y);
+
+    }
+
+    @Override
+    public void Step() {
         
     }
-               
-    
-        
+
 }

@@ -2,6 +2,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Random;
+import java.util.Scanner;
 
 import BaseHero.BaseHero;
 import BaseHero.Name;
@@ -30,8 +31,23 @@ public class Main {
          }
       });
 
-      teamInfo(twoTeam);
+      // teamInfo(twoTeam);
 
+      Scanner user_input = new Scanner(System.in);
+
+
+      String stop = "";
+      while (stop.equals("")) {
+         for (BaseHero unit: twoTeam) {
+            unit.Step(twoTeam);
+         }
+         twoTeam.forEach(n -> System.out.println(n.GetInfo()));
+         stop = user_input.nextLine();
+      }
+      for (BaseHero unit: twoTeam) {
+         unit.Step(twoTeam);
+      }
+      
    }
 
    public static void getTeam(int quantity,List<BaseHero> team,int whichTeam){
@@ -39,16 +55,16 @@ public class Main {
          for (int index = 0; index < quantity; index++) {
             switch (new Random().nextInt(0, 4)) {
                case 0:
-                  team.add(new Peasant(heroName()));
+                  team.add(new Peasant(heroName(),1,1));
                   break;
                case 1:
-                  team.add(new Magician(heroName()));
+                  team.add(new Magician(heroName(),1,1));
                   break;
                case 2:
-                  team.add(new Crossbowman(heroName()));
+                  team.add(new Crossbowman(heroName(),1,1));
                   break;
                case 3:
-                  team.add(new Raider(heroName()));
+                  team.add(new Raider(heroName(),1,1));
                   break;
             }
          }
@@ -56,16 +72,16 @@ public class Main {
          for (int index = 0; index < quantity; index++) {
             switch (new Random().nextInt(0, 4)) {
                case 0:
-                  team.add(new Farmer(heroName()));
+                  team.add(new Farmer(heroName(),10,1));
                   break;
                case 1:
-                  team.add(new Monk(heroName()));
+                  team.add(new Monk(heroName(),10,1));
                   break;
                case 2:
-                  team.add(new Sniper(heroName()));
+                  team.add(new Sniper(heroName(),10,1));
                   break;
                case 3:
-                  team.add(new Spearman(heroName()));
+                  team.add(new Spearman(heroName(),10,1));
                   break;
             }
          }
@@ -83,4 +99,5 @@ public class Main {
    public static String heroName() {
       return String.valueOf(Name.values()[new Random().nextInt(Name.values().length)]);
    }
+
 }
