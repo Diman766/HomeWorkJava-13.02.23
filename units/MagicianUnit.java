@@ -1,7 +1,6 @@
+package units;
 
 import java.util.List;
-
-import BaseHero.BaseHero;
 
 public abstract class MagicianUnit extends BaseHero {
     private int magic;
@@ -16,25 +15,25 @@ public abstract class MagicianUnit extends BaseHero {
     public void Step(List<BaseHero> twoTeam) {
         if (state.equals("Die") || magic <= 0) {
             return;
-        } else {
-            BaseHero victim = findVeryIll(twoTeam);
+        } else if (findVeryIll(twoTeam) != -1){
+            BaseHero victim = twoTeam.get(findVeryIll(twoTeam));
             victim.damage(damage[0]);
-        }
-        // magic -= 1;
+        }else return;
+       
     }
 
-    protected BaseHero findVeryIll(List<BaseHero> twoTeam) {
-        double minHp = Double.MIN_VALUE;
-        int index = 0;
+    protected int findVeryIll(List<BaseHero> twoTeam) {
+        double minHp = 0;
+        int index = -1;
         for (int i = 0; i < twoTeam.size(); i++) {
             // BaseHero pers = twoTeam.get(i);
-            if (minHp < twoTeam.get(i).maxHp - twoTeam.get(i).hp & twoTeam.get(i).team == team
-                    & twoTeam.get(i).getStatus() != "Die") {
+            if (minHp < twoTeam.get(i).maxHp - twoTeam.get(i).hp && twoTeam.get(i).team == team
+                    && twoTeam.get(i).getStatus() != "Die") {
                 index = i;
                 minHp = twoTeam.get(i).maxHp - twoTeam.get(i).hp;
             }
         }
-        return twoTeam.get(index);
+        return index;
     }
 
 }

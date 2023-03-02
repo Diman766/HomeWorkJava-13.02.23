@@ -1,3 +1,4 @@
+package units;
 
 public class Peasant extends PeasantUnit {
 
@@ -5,12 +6,4 @@ public class Peasant extends PeasantUnit {
         super(heroID,2, x, y);
 
     }
-
-    // @Override
-    public void Step() {
-        
-    }
-
-    
-
 }

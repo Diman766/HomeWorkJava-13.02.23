@@ -1,8 +1,7 @@
+package units;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import BaseHero.BaseHero;
 
 public abstract class ShooterUnit extends BaseHero {
     public int shots;
@@ -11,6 +10,15 @@ public abstract class ShooterUnit extends BaseHero {
             int shots, int team, int x, int y) {
         super(heroID, hp, maxHp, attack, protection, damage, speed, team, x, y);
         this.shots = 32;
+    }
+
+    @Override
+    public String toString() {
+        return this.getClass().getSimpleName() +
+                " H:" + Math.round(hp) +
+                " A:" + attack +
+                " Dmg:" + Math.round(Math.abs((damage[0] + damage[1]) / 2)) + " " +
+                state + " Shots:" + shots + " ";
     }
 
     @Override
@@ -40,8 +48,7 @@ public abstract class ShooterUnit extends BaseHero {
             }
             shots--;
         }
-        // return;
-
+   
     }
 
     private int getVictim(List<BaseHero> enemys) {

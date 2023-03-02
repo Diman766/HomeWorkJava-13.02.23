@@ -3,26 +3,21 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
-
-import BaseHero.BaseHero;
-import BaseHero.Name;
+import units.*;
 
 public class Main {
+   public static List<BaseHero> red = new ArrayList<>();
+   public static List<BaseHero> blue = new ArrayList<>();
+   public static List<BaseHero> twoTeam = new ArrayList<>();
 
    public static void main(String[] args) {
 
-      List<BaseHero> red = new ArrayList<>();
       getTeam(10, red, 2);
-      // teamInfo(red);
 
-      List<BaseHero> blue = new ArrayList<>();
       getTeam(10, blue, 1);
-      // teamInfo(blue);
 
-      List<BaseHero> twoTeam = new ArrayList<>();
       twoTeam.addAll(blue);
       twoTeam.addAll(red);
-      
 
       twoTeam.sort(new Comparator<BaseHero>() {
          @Override
@@ -33,32 +28,27 @@ public class Main {
          }
       });
 
-      // teamInfo(twoTeam);
-
       Scanner user_input = new Scanner(System.in);
 
       String stop = "";
       while (stop.equals("")) {
+         View.view();
          for (BaseHero unit : twoTeam) {
             if (vin(red) == true & vin(blue) == true) {
                unit.Step(twoTeam);
             } else if (vin(red)) {
-               teamInfo(red);
-               teamInfo(blue);
+               View.view();
                System.out.println("Blue Vin !");
                user_input.close();
                return;
             } else if (vin(blue)) {
-               teamInfo(red);
-               teamInfo(blue);
+               View.view();
                System.out.println("Red Vin !");
                user_input.close();
                return;
             }
          }
          // twoTeam.forEach(n -> System.out.println(n.GetInfo()));
-         teamInfo(red);
-         teamInfo(blue);
          stop = user_input.nextLine();
       }
       user_input.close();
@@ -75,36 +65,36 @@ public class Main {
 
    public static void getTeam(int quantity, List<BaseHero> team, int whichTeam) {
       if (whichTeam == 1) {
-         for (int index = 0; index < quantity; index++) {
+         for (int index = 1; index < quantity + 1; index++) {
             switch (new Random().nextInt(0, 4)) {
                case 0:
-                  team.add(new Peasant(heroName(), 1, index));
+                  team.add(new Peasant(heroName(), index, 10));
                   break;
                case 1:
-                  team.add(new Magician(heroName(), 1, index));
+                  team.add(new Magician(heroName(), index, 10));
                   break;
                case 2:
-                  team.add(new Crossbowman(heroName(), 1, index));
+                  team.add(new Crossbowman(heroName(), index, 10));
                   break;
                case 3:
-                  team.add(new Raider(heroName(), 1, index));
+                  team.add(new Raider(heroName(), index, 10));
                   break;
             }
          }
       } else {
-         for (int index = 0; index < quantity; index++) {
+         for (int index = 1; index < quantity + 1; index++) {
             switch (new Random().nextInt(0, 4)) {
                case 0:
-                  team.add(new Farmer(heroName(), 10, index));
+                  team.add(new Farmer(heroName(), index, 1));
                   break;
                case 1:
-                  team.add(new Monk(heroName(), 10, index));
+                  team.add(new Monk(heroName(), index, 1));
                   break;
                case 2:
-                  team.add(new Sniper(heroName(), 10, index));
+                  team.add(new Sniper(heroName(), index, 1));
                   break;
                case 3:
-                  team.add(new Spearman(heroName(), 10, index));
+                  team.add(new Spearman(heroName(), index, 1));
                   break;
             }
          }
