@@ -32,6 +32,7 @@ public class Main {
 
       String stop = "";
       while (stop.equals("")) {
+         
          View.view();
          for (BaseHero unit : twoTeam) {
             if (vin(red) == true & vin(blue) == true) {
@@ -43,7 +44,7 @@ public class Main {
                return;
             } else if (vin(blue)) {
                View.view();
-               System.out.println("Red Vin !");
+               System.out.println("Green Vin !");
                user_input.close();
                return;
             }
@@ -69,12 +70,15 @@ public class Main {
             switch (new Random().nextInt(0, 4)) {
                case 0:
                   team.add(new Peasant(heroName(), index, 10));
+                  // team.add(new Raider(heroName(), index, 10));
                   break;
                case 1:
                   team.add(new Magician(heroName(), index, 10));
+                  // team.add(new Raider(heroName(), index, 10));
                   break;
                case 2:
                   team.add(new Crossbowman(heroName(), index, 10));
+                  // team.add(new Raider(heroName(), index, 10));
                   break;
                case 3:
                   team.add(new Raider(heroName(), index, 10));

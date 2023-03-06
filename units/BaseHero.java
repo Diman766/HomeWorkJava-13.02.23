@@ -4,7 +4,7 @@ import java.util.List;
 
 public abstract class BaseHero implements Interface {
     protected String heroID;
-    public int hp;
+    protected int hp;
     protected int attack;
     protected int protection;
     protected int[] damage = new int[2];
@@ -28,24 +28,20 @@ public abstract class BaseHero implements Interface {
         this.state = "Stand";
     }
 
-    // public BaseHero(String heroID, int hp, int attack, int protection, int damage, int speed, int team,
-    //         int x, int y) {
-    //     this.BaseHero( heroID,  hp,  maxHp,  attack,  protection,  damage,  speed,  team,
-    //      x,  y);
-        
-    //     this.damage[0] = damage;
-    //     this.damage[1] = damage;
-        
-    // }
+    public BaseHero(String heroID, int hp, int maxHp, int attack, int protection, int i, int speed, int team, int x,
+            int y) {
+        this(heroID, hp, maxHp, attack, protection, new int[] { i, i }, speed, team, x, y);
+
+    }
 
     @Override
     public String toString() {
         return this.getClass().getSimpleName() +
-                // " H:" + Math.round(hp) +
+        // " H:" + Math.round(hp) +
                 " H:" + hp +
                 // " D:" + protection +
                 " A:" + attack +
-                " Dmg:" + Math.round(Math.abs((damage[0]+damage[1])/2)) +
+                " Dmg:" + Math.round(Math.abs((damage[0] + damage[1]) / 2)) +
                 " " + state;
     }
 
@@ -64,8 +60,9 @@ public abstract class BaseHero implements Interface {
     }
 
     public String GetInfo() {
-        return String.format("%11s  Hp: %2d  A: %2d  Dmg: %2s:  %7s",this.state,this.hp,
-                 this.attack, this.hp, Math.round(Math.abs((this.damage[0]+this.damage[1])/2)), this.state);
+        return String.format("Name: %7s  Speed: %2d  Hp: %2d  Role: %12s:  Status: %7s",
+        this.heroID, this.speed, this.hp, this.getClass().getSimpleName(),this.state);
+        
     }
 
     public void Step(List<BaseHero> twoTeam) {
@@ -94,6 +91,28 @@ public abstract class BaseHero implements Interface {
 
     public int getProtection() {
         return protection;
+    }
+
+    protected void listEnemy(List<BaseHero> twoTeam, List<BaseHero> enemy) {
+
+        for (BaseHero i : twoTeam) {
+            if (i.getStatus() != "Die" && i.getTeam() != team) {
+                enemy.add(i);
+            }
+
+        }
+    }
+
+    protected int getVictim(List<BaseHero> enemys) {
+        int victim = 0;
+        double minDistance = position.distance(enemys.get(0).getPosition());
+        for (BaseHero i : enemys) {
+            if (minDistance >= position.distance(i.getPosition())) {
+                minDistance = position.distance(i.getPosition());
+                victim = enemys.indexOf(i);
+            }
+        }
+        return victim;
     }
 
 }

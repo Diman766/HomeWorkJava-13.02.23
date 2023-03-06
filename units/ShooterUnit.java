@@ -44,33 +44,11 @@ public abstract class ShooterUnit extends BaseHero {
                         & i.state.equals("Stand")) {
                     i.state = "Busy";
                     return;
-                }
+                } 
             }
             shots--;
         }
    
-    }
-
-    private int getVictim(List<BaseHero> enemys) {
-        int victim = 0;
-        double minDistance = position.distance(enemys.get(0).getPosition());
-        for (BaseHero i : enemys) {
-            if (minDistance >= position.distance(i.getPosition())) {
-                minDistance = position.distance(i.getPosition());
-                victim = enemys.indexOf(i);
-            }
-        }
-        return victim;
-    }
-
-    private void listEnemy(List<BaseHero> twoTeam, List<BaseHero> enemy) {
-
-        for (BaseHero i : twoTeam) {
-            if (i.getStatus() != "Die" && i.getTeam() != team) {
-                enemy.add(i);
-            }
-
-        }
     }
 
     public String GetInfo() {
